@@ -3,6 +3,7 @@ package com.itheima.mp;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.itheima.mp.domain.po.User;
+import com.itheima.mp.domain.po.UserInfo;
 import com.itheima.mp.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,15 @@ class MpDemoApplicationTests {
     @Test
     void contextLoads() {
         User user = new User();
-        user.setId(5L);
-        user.setUsername("Lucy1");
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAge(24);
+        userInfo.setIntro("英语老师");
+        userInfo.setGender("female");
+        user.setUsername("Lucy2");
         user.setPassword("123");
-        user.setPhone("1233456456");
+        user.setPhone("18688990011");
         user.setBalance(200);
-        user.setInfo("{\"age\": 24, \"intro\": \"英语老师\", \"gender\": \"female\"}");
+//        user.setInfo(userInfo);
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         userMapper.insert(user);

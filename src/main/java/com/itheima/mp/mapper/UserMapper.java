@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface UserMapper extends BaseMapper<User> {
 
-    void saveUser(User user);
+//    void saveUser(User user);
 
     void deleteUser(Long id);
 

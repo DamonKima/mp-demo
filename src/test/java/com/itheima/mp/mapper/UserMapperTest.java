@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.itheima.mp.domain.po.Address;
 import com.itheima.mp.domain.po.User;
+import com.itheima.mp.domain.po.UserInfo;
 import com.itheima.mp.service.IAddressService;
 import com.itheima.mp.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -22,26 +23,34 @@ import java.util.List;
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class UserMapperTest {
 
-    @Autowired
-    private UserMapper userMapper;
+//    @Autowired
+//    private UserMapper userMapper;
+    
+    private final UserMapper userMapper;
 
 //    @Autowired
 //    private IAddressService addressService;
 
     private final IAddressService addressService;
 
+    private final IUserService userService;
+    
     @Test
     void testInsert() {
         User user = new User();
 //        user.setId(5L);
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAge(24);
+        userInfo.setIntro("英语老师");
+        userInfo.setGender("female");
         user.setUsername("Lucy2");
         user.setPassword("123");
         user.setPhone("18688990011");
         user.setBalance(200);
-        user.setInfo("{\"age\": 24, \"intro\": \"英文老师\", \"gender\": \"female\"}");
+//        user.setInfo(userInfo);
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
-        userMapper.saveUser(user);
+//        userMapper.saveUser(user);
     }
 
     @Test
@@ -157,6 +166,12 @@ class UserMapperTest {
     @Test
     void testQuery1() {
         List<Address> list = addressService.list();
+        list.forEach(System.out::println);
+    }
+    
+    @Test
+    void testQuery2(){
+        List<User> list = userService.list();
         list.forEach(System.out::println);
     }
     

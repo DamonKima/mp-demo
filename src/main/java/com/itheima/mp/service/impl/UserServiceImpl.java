@@ -7,6 +7,7 @@ import com.itheima.mp.domain.po.Address;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.vo.AddressVO;
 import com.itheima.mp.domain.vo.UserVO;
+import com.itheima.mp.enums.UserStatus;
 import com.itheima.mp.mapper.UserMapper;
 import com.itheima.mp.service.IUserService;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         //1. 查询用户
         User user = baseMapper.queryById(id);
         //2. 判断用户状态
-        if (user == null || user.getStatus() == 2) {
+        if (user == null || user.getStatus() == UserStatus.NORMAL) {
             throw new RuntimeException("用户状态异常");
         }
         //3. 判断用户余额
@@ -54,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userVO.setAddress(BeanUtil.copyToList(addressList, AddressVO.class));
         return userVO;
     }
-    
+
     public List<UserVO> listUserAndAddressByIds(List<Long> ids) {
         List<User> userList = lambdaQuery()
                 .in(User::getId, ids)

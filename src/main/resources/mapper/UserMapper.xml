@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.itheima.mp.mapper.UserMapper">
-    
-    <insert id="saveUser" parameterType="com.itheima.mp.domain.po.User">
-        INSERT INTO `user` (`id`, `username`, `password`, `phone`, `info`, `balance`)
-        VALUES
-        (#{id}, #{username}, #{password}, #{phone}, #{info}, #{balance});
-    </insert>
+    <!--这个插入有错误，当该info使用了json传入的话，info参数是一个对象来的，但是user这里没有作为对象处理-->
+<!--    <insert id="saveUser" parameterType="com.itheima.mp.domain.po.User">-->
+<!--        INSERT INTO `user` (`id`, `username`, `password`, `phone`, `info`, `balance`)-->
+<!--        VALUES-->
+<!--        (#{id}, #{username}, #{password}, #{phone}, #{info}, #{balance});-->
+<!--    </insert>-->
     <update id="updateUser" parameterType="com.itheima.mp.domain.po.User">
         UPDATE `user`
         <set>
