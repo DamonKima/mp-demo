@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @ApiModel(description = "用户查询条件实体")
-public class UserQuery {
+public class UserQuery extends PageQuery{
     
     @ApiModelProperty("用户名关键词")
     private String name;
