@@ -78,7 +78,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public PageDTO<UserVO> queryUsersPage(UserQuery query) {
         // 1. 构建条件
         // 1.1 分页条件
-        Page<User> page = Page.of(query.getPageNo(), query.getPageSize());
+//        Page<User> page = Page.of(query.getPageNo(), query.getPageSize());
+        Page<User> page = query.toMpPage();
         // 1.2 排序条件
         if (query.getSortBy() != null) {
             page.addOrder(new OrderItem(query.getSortBy(), query.getIsAsc()));

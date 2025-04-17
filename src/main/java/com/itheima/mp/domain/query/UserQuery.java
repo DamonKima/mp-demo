@@ -2,7 +2,9 @@ package com.itheima.mp.domain.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
 @ApiModel(description = "用户查询条件实体")

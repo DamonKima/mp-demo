@@ -9,6 +9,8 @@ import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.itheima.mp.domain.po.Address;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.po.UserInfo;
+import com.itheima.mp.domain.query.PageQuery;
+import com.itheima.mp.domain.query.UserQuery;
 import com.itheima.mp.service.IAddressService;
 import com.itheima.mp.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,7 @@ class UserMapperTest {
 
 //    @Autowired
 //    private UserMapper userMapper;
-    
+
     private final UserMapper userMapper;
 
 //    @Autowired
@@ -36,7 +38,7 @@ class UserMapperTest {
     private final IAddressService addressService;
 
     private final IUserService userService;
-    
+
     @Test
     void testInsert() {
         User user = new User();
@@ -170,17 +172,17 @@ class UserMapperTest {
         List<Address> list = addressService.list();
         list.forEach(System.out::println);
     }
-    
+
     @Test
-    void testQuery2(){
+    void testQuery2() {
         List<User> list = userService.list();
         list.forEach(System.out::println);
     }
-    
+
     @Test
-    void testPageQuery(){
+    void testPageQuery() {
         Page<User> page = Page.of(2, 2);
-        page.addOrder(new OrderItem("balance",false));
+        page.addOrder(new OrderItem("balance", false));
         userService.page(page);
         // 总条数
         System.out.println("page.getTotal() = " + page.getTotal());
@@ -189,5 +191,15 @@ class UserMapperTest {
         // 数据
         List<User> records = page.getRecords();
         records.forEach(System.out::println);
+    }
+
+    @Test
+    void test22() {
+        PageQuery query = PageQuery.builder()
+                .pageNo(1L)
+                .pageSize(10L)
+                .build();
+        Page<User> page = query.toMpPage();
+        
     }
 }
