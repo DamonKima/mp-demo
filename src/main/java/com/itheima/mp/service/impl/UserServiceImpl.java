@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.baomidou.mybatisplus.extension.toolkit.Db;
 import com.itheima.mp.domain.dto.PageDTO;
+import com.itheima.mp.domain.dto.UserFormDTO;
 import com.itheima.mp.domain.po.Address;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.query.UserQuery;
@@ -75,11 +76,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         }).collect(Collectors.toList());
     }
 
-    public PageDTO<UserVO> queryUsersPage(UserQuery query) {
+    /*public PageDTO<UserVO> queryUsersPage(UserQuery query) {
         // 1. 构建条件
         // 1.1 分页条件
-//        Page<User> page = Page.of(query.getPageNo(), query.getPageSize());
-        Page<User> page = query.toMpPage();
+        Page<User> page = Page.of(query.getPageNo(), query.getPageSize());
+//        Page<User> page = query.toMpPage();// 使用内置方法进行设置分页条件
         // 1.2 排序条件
         if (query.getSortBy() != null) {
             page.addOrder(new OrderItem(query.getSortBy(), query.getIsAsc()));
@@ -93,10 +94,36 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         List<User> records = page.getRecords();
         if (records == null || records.size() <= 0) {
             // 无数据，返回空结果
+//            return PageDTO.empty(page);// 使用静态函数代替，更加方便使用
             return new PageDTO<>(page.getTotal(), page.getPages(), Collections.emptyList());
         }
         // 4. 有数据，转换
         List<UserVO> list = BeanUtil.copyToList(records, UserVO.class);
+//        return PageDTO.of(page, UserVO.class);// 使用静态函数of代替
         return new PageDTO<>(page.getTotal(), page.getPages(), list);
+    }*/
+
+    // 简化后的代码
+    /*public PageDTO<UserVO> queryUsersPage(UserQuery query) {
+        // 1. 构建条件
+        Page<User> page = query.toMpPageDefaultSortByCreateTimeDesc();
+        // 2. 查询
+        page(page);
+        // 3. 封装返回
+        return PageDTO.of(page, UserVO.class);
+    }*/
+
+    // 简化后的代码二,自定姨PO到VO的过程，也就是修改其中的某些变量
+    public PageDTO<UserVO> queryUsersPage(UserQuery query) {
+        Page<User> page = query.toMpPageDefaultSortByCreateTimeDesc();
+        page(page);
+        return PageDTO.of(page, user -> {
+            UserVO vo = BeanUtil.copyProperties(user, UserVO.class);
+            String username = vo.getUsername();
+            vo.setUsername(username.substring(0, username.length() - 2) + "**");
+            return vo;
+        });
     }
+    
+    
 }

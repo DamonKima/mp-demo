@@ -195,11 +195,6 @@ class UserMapperTest {
 
     @Test
     void test22() {
-        PageQuery query = PageQuery.builder()
-                .pageNo(1L)
-                .pageSize(10L)
-                .build();
-        Page<User> page = query.toMpPage();
         
     }
 }
