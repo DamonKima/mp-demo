@@ -71,7 +71,7 @@ public class PageDTO<V> {
     public static <V, P> PageDTO<V> of(Page<P> p, Function<P, V> convertor) {
         // 1. 非空校验
         List<P> records = p.getRecords();
-        if (records == null || records.size() <= 0) {
+        if (records == null || records.size() <= 0) {   
             // 无数据，返回空结果
             return empty(p);
         }
