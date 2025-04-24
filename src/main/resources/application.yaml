@@ -36,5 +36,5 @@ knife4j:
       default:
         group-name: default
         api-rule: package
-        api-rule-resources: 
+        api-rule-resources:
           - com.itheima.mp.controller
