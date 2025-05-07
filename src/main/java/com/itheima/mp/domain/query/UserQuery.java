@@ -19,6 +19,7 @@ public class UserQuery extends PageQuery{
     @ApiModelProperty("余额最小值")
     private Integer minBalance;
     
+    
     @ApiModelProperty("余额最大值")
     private Integer maxBalance;
 }
